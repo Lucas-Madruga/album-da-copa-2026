@@ -7,6 +7,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{--gold:#F0B429;--gold-d:#C18C00;--green:#00613f;--green2:#003d28;--bg:#090f0c;--s1:#0f1a14;--s2:#182419;--s3:#1f2e22;--text:#eeeae0;--muted:#7a9480;--have:#22c55e;--repeat:#3b82f6;--border:#1e3322;}
+
+/* ── LOGIN SCREEN ── */
+#login-screen{position:fixed;inset:0;background:linear-gradient(160deg,var(--green),var(--bg) 60%);z-index:999;display:flex;align-items:center;justify-content:center;padding:24px;}
+.login-box{background:var(--s1);border:1px solid var(--border);border-radius:20px;padding:36px 28px;width:100%;max-width:340px;text-align:center;border-top:3px solid var(--gold);}
+.login-icon{font-size:48px;margin-bottom:12px;}
+.login-title{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--gold);letter-spacing:1.5px;margin-bottom:4px;}
+.login-sub{font-size:13px;color:var(--muted);margin-bottom:28px;}
+.login-input{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:14px 16px;color:var(--text);font-size:18px;font-family:'DM Sans',sans-serif;outline:none;text-align:center;letter-spacing:4px;transition:border-color .2s;margin-bottom:14px;}
+.login-input:focus{border-color:var(--gold);}
+.login-input::placeholder{letter-spacing:1px;font-size:14px;color:var(--muted);}
+.login-btn{width:100%;padding:14px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#050e08;font-family:'DM Sans',sans-serif;font-weight:700;font-size:15px;cursor:pointer;transition:all .15s;margin-bottom:12px;}
+.login-btn:active{transform:scale(.97);}
+.login-err{font-size:13px;color:#f87171;min-height:18px;transition:opacity .2s;}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;padding-bottom:90px;}
 header{background:linear-gradient(160deg,var(--green),var(--green2));padding:14px 16px 10px;position:sticky;top:0;z-index:100;border-bottom:3px solid var(--gold);box-shadow:0 6px 24px rgba(0,0,0,.6);}
@@ -109,6 +122,18 @@ header{background:linear-gradient(160deg,var(--green),var(--green2));padding:14p
 </style>
 </head>
 <body>
+
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-icon">⚽</div>
+    <div class="login-title">COPA 2026</div>
+    <div class="login-sub">Álbum pessoal — acesso restrito</div>
+    <input class="login-input" id="pwd-input" type="password" placeholder="Digite a senha" maxlength="20"
+      onkeydown="if(event.key==='Enter')checkPwd()">
+    <button class="login-btn" onclick="checkPwd()">Entrar</button>
+    <div class="login-err" id="pwd-err"></div>
+  </div>
+</div>
 <header>
   <div class="hd-row">
     <div class="logo">
@@ -482,6 +507,33 @@ function copyShare(){
 function confirmReset(){if(confirm('Apagar todo o progresso? Não há como desfazer.')){D={};save();render();showToast('🗑 Tudo apagado.');}}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2400);}
 
+
+// ═══════════════════════════════════
+// AUTH — senha simples
+// ═══════════════════════════════════
+// Troque MINHA_SENHA pela senha que você quiser
+const PWD_HASH = 'whu3';
+function hashStr(s){let h=0;for(let i=0;i<s.length;i++){h=Math.imul(31,h)+s.charCodeAt(i)|0;}return h.toString(36);}
+function checkPwd(){
+  const v=document.getElementById('pwd-input').value;
+  if(hashStr(v)===PWD_HASH){
+    sessionStorage.setItem('copa26_auth','1');
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('pwd-err').textContent='';
+  } else {
+    document.getElementById('pwd-err').textContent='Senha incorreta. Tente novamente.';
+    document.getElementById('pwd-input').value='';
+    document.getElementById('pwd-input').focus();
+  }
+}
+function initAuth(){
+  if(sessionStorage.getItem('copa26_auth')==='1'){
+    document.getElementById('login-screen').style.display='none';
+  } else {
+    setTimeout(()=>document.getElementById('pwd-input').focus(),300);
+  }
+}
+initAuth();
 load();render();
 </script>
 </body>
