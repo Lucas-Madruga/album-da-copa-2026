@@ -107,7 +107,7 @@ header{background:linear-gradient(160deg,var(--green),var(--green2));padding:14p
 .overlay.open .modal{transform:translateY(0);}
 .m-title{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--gold);letter-spacing:1px;}
 .m-sub{font-size:13px;color:var(--muted);margin-bottom:18px;margin-top:2px;}
-.m-opts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px;}
+.m-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
 .mopt{padding:14px 6px;border-radius:12px;border:2px solid;background:transparent;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:700;font-size:12px;display:flex;flex-direction:column;align-items:center;gap:5px;color:var(--text);}
 .mopt:active{transform:scale(.94);}
 .mopt.m{border-color:#2e5236;}.mopt.h{border-color:var(--have);}.mopt.r{border-color:var(--repeat);}
@@ -170,11 +170,13 @@ header{background:linear-gradient(160deg,var(--green),var(--green2));padding:14p
   <div class="modal">
     <div class="m-title" id="mTitle">—</div>
     <div class="m-sub" id="mSub"></div>
-    <div class="m-opts">
+    <div class="m-opts" id="mOpts">
       <button class="mopt m" onclick="setStatus('missing')"><span class="mopt-ico">❌</span>Não tenho</button>
       <button class="mopt h" onclick="setStatus('have')"><span class="mopt-ico">✅</span>Tenho</button>
-      <button class="mopt r" onclick="setStatus('repeat')"><span class="mopt-ico">🔁</span>Repetida</button>
+      <button class="mopt r" onclick="setStatus('repeat')"><span class="mopt-ico">➕</span>+1 repetida</button>
+      <button class="mopt m" onclick="setStatus('less')" style="border-color:#f97316"><span class="mopt-ico">➖</span>-1 repetida</button>
     </div>
+    <div id="mCount" style="text-align:center;font-size:13px;color:var(--muted);margin-bottom:12px;"></div>
     <button class="m-cancel" onclick="closeModal('modStk')">Cancelar</button>
   </div>
 </div>
@@ -281,10 +283,10 @@ const GROUPS = [
   {code:'PAN',name:'Panamá',flag:'🇵🇦',players:['Escudo','Luis Mejía','Orlando Mosquera','Fidel Escobar','Édgar Bárcenas','Harold Cummings','Michael Murillo','Óscar Linton','Adalberto Carrasquilla','Aníbal Godoy','José Fajardo','Cristian Martínez','Rolando Blackburn','Gabriel Torres','Alberto Quintero','Cecilio Waterman','Eduardo Guerrero','Ismael Díaz','Freddy Góndola','—']},
  ]},
  {id:'K',name:'Grupo K',teams:[
-  {code:'CAN',name:'Canadá',flag:'🇨🇦',players:['Escudo','Dayne St. Clair','Alphonso Davies','Alistair Johnston','Samuel Adekugbe','Richie Laryea','Derek Cornelius','Moïse Bombito','Kamal Miller','Stephen Eustáquio','Ismaël Koné','Jonathan Osorio','Jacob Shaffelburg','Mathieu Choinière','Niko Sigur','Tajon Buchanan','Liam Millar','Cyle Larin','Jonathan David','—']},
+  {code:'GHA',name:'Gana',flag:'🇬🇭',players:['Escudo','Lawrence Ati-Zigi','Manaf Nurudeen','Andy Yiadom','Alexander Djiku','Daniel Amartey','Tariq Lamptey','Abdul Mumin','Baba Rahman','Thomas Partey','Salis Abdul Samed','Mohammed Kudus','Kamaldeen Sulemana','Antoine Semenyo','Jordan Ayew','Inaki Williams','Osman Bukari','Ernest Nuamah','—','—']},
+  {code:'CRO',name:'Croácia',flag:'🇭🇷',players:['Escudo','Dominik Livaković','Ivica Ivušić','Josip Šutalo','Dario Špikić','Josip Stanišić','Martin Erlić','Borna Sosa','Josip Juranović','Luka Modrić','Mateo Kovačić','Marcelo Brozović','Mario Pašalić','Ante Budimir','Andrej Kramarić','Ivan Perišić','Bruno Petković','Luka Ivanušec','—','—']},
   {code:'BIH',name:'Bósnia e Herz.',flag:'🇧🇦',players:['Escudo','Nikola Vasilj','Amar Dedić','Sead Kolašinac','Tarik Muharemović','Nihad Mujakić','Nikola Katić','Amir Hadžiahmetović','Benjamin Tahirović','Armin Gigović','Ivan Šunjić','Ivan Bašić','Dženis Burnić','Esmir Bajraktarević','Amar Memić','Ermedin Demirović','Edin Džeko','Samed Baždar','Haris Tabaković','—']},
   {code:'QAT',name:'Catar',flag:'🇶🇦',players:['Escudo','Meshaal Barsham','Sultan Albrake','Lucas Mendes','Homam Ahmed','Boualem Khoukhi','Pedro Miguel','Tarek Salman','Mohamed Al-Mannai','Karim Boudiaf','Assim Madibo','Ahmed Fatehi','Mohammed Waad','Abdulaziz Hatem','Hassan Al-Haydos','Edmilson Junior','Akram Hassan Afif','Ahmed Al Ganehi','Almoez Ali','—']},
-  {code:'SUI',name:'Suíça',flag:'🇨🇭',players:['Escudo','Gregor Kobel','Yvon Mvogo','Manuel Akanji','Ricardo Rodriguez','Nico Elvedi','Aurèle Amenda','Silvan Widmer','Granit Xhaka','Denis Zakaria','Remo Freuler','Fabian Rieder','Ardon Jashari','Michel Aebischer','Breel Embolo','Ruben Vargas','Dan Ndoye','Zeki Amdouni','—','—']},
  ]},
  {id:'L',name:'Grupo L',teams:[
   {code:'USA',name:'Estados Unidos',flag:'🇺🇸',players:['Escudo','Matt Freese','Chris Richards','Tim Ream','Mark McKenzie','Antonee Robinson','Tyler Adams','Tanner Tessmann','Weston McKennie','Christian Roldan','Timothy Weah','Diego Luna','Malik Tillman','Christian Pulisic','Brenden Aaronson','Ricardo Pepi','Haji Wright','Folarin Balogun','—','—']},
@@ -326,7 +328,13 @@ let D={}, filter='all', view='grid', activeKey=null;
 const STORE='copa26_v5';
 function load(){try{const s=localStorage.getItem(STORE);if(s)D=JSON.parse(s);}catch(e){}}
 function save(){try{localStorage.setItem(STORE,JSON.stringify(D));}catch(e){}}
-function gs(k){return D[k]||'missing';}
+function gs(k){
+  const v=D[k]||0;
+  if(v===0) return 'missing';
+  if(v===1) return 'have';
+  return 'repeat'; // 2+
+}
+function gcount(k){return D[k]||0;}
 
 function calcTotal(){
   let t=INTRO.items.length;
@@ -334,7 +342,7 @@ function calcTotal(){
   t+=FIFA_MUSEUM.items.length+COCA.items.length;
   return t;
 }
-function calcCollected(){return Object.values(D).filter(v=>v==='have'||v==='repeat').length;}
+function calcCollected(){return Object.values(D).filter(v=>v>=1).length;}
 
 // ═══════════════════════════════════
 // RENDER
@@ -433,7 +441,7 @@ function stkEl(k,prefix,num,name,lbl){
     ${prefix?`<div class="stk-prefix">${prefix}</div>`:''}
     <div class="stk-num">${num}</div>
     <div class="stk-ico">${s==='have'?'✅':s==='repeat'?'🔁':''}</div>
-    ${s==='repeat'?'<div class="rep-badge">R</div>':''}
+    ${gcount(k)>1?`<div class="rep-badge">${gcount(k)}</div>`:''}
   </div>`;
 }
 function rowEl(k,lbl,name){
@@ -466,13 +474,23 @@ function openModal(key,lbl,name){
   activeKey=key;
   document.getElementById('mTitle').textContent=lbl;
   document.getElementById('mSub').textContent=name;
+  const cnt=gcount(key);
+  const el=document.getElementById('mCount');
+  if(cnt===0) el.textContent='Status: não tenho';
+  else if(cnt===1) el.textContent='Status: ✅ tenho (1 cópia)';
+  else el.textContent=`Status: 🔁 tenho ${cnt} cópias (${cnt-1} repetida${cnt-1>1?'s':''})`;
   document.getElementById('modStk').classList.add('open');
 }
 function setStatus(s){
   if(!activeKey)return;
-  if(s==='missing')delete D[activeKey];else D[activeKey]=s;
+  if(s==='missing'){ delete D[activeKey]; showToast('❌ Removida'); }
+  else if(s==='have'){ D[activeKey]=1; showToast('✅ Marcada!'); }
+  else if(s==='repeat'){ D[activeKey]=(D[activeKey]||1)+1; showToast('🔁 +1 repetida! Total: '+(D[activeKey]-1)+'x'); }
+  else if(s==='less'){ 
+    if((D[activeKey]||1)>1){ D[activeKey]--; showToast('➖ Repetida removida. Total: '+(D[activeKey]-1)+'x'); }
+    else { delete D[activeKey]; showToast('❌ Removida'); }
+  }
   save();closeModal('modStk');render();
-  showToast({have:'✅ Marcada!',repeat:'🔁 Repetida!',missing:'❌ Removida'}[s]);
 }
 function closeModal(id){document.getElementById(id).classList.remove('open');activeKey=null;}
 document.getElementById('modStk').addEventListener('click',function(e){if(e.target===this)closeModal('modStk');});
@@ -483,7 +501,7 @@ document.getElementById('modShare').addEventListener('click',function(e){if(e.ta
 // ═══════════════════════════════════
 function openShare(){
   const rep=[],mis=[];
-  function check(k,lbl){const s=gs(k);if(s==='repeat')rep.push(lbl);else if(s==='missing')mis.push(lbl);}
+  function check(k,lbl){const cnt=gcount(k);if(cnt>1)rep.push(`${lbl}(×${cnt-1})`);else if(cnt===0)mis.push(lbl);}
   INTRO.items.forEach(s=>check(s.k,s.lbl));
   GROUPS.forEach(g=>g.teams.forEach(tm=>tm.players.forEach((_,i)=>check(`${tm.code}|${i+1}`,`${tm.code} ${i+1}`))));
   FIFA_MUSEUM.items.forEach(s=>check(s.k,s.lbl));
