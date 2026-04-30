@@ -3,23 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Álbum Copa 2026</title>
+<title>WC26</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{--gold:#F0B429;--gold-d:#C18C00;--green:#00613f;--green2:#003d28;--bg:#090f0c;--s1:#0f1a14;--s2:#182419;--s3:#1f2e22;--text:#eeeae0;--muted:#7a9480;--have:#22c55e;--repeat:#3b82f6;--border:#1e3322;}
 
-/* ── LOGIN SCREEN ── */
-#login-screen{position:fixed;inset:0;background:linear-gradient(160deg,var(--green),var(--bg) 60%);z-index:999;display:flex;align-items:center;justify-content:center;padding:24px;}
-.login-box{background:var(--s1);border:1px solid var(--border);border-radius:20px;padding:36px 28px;width:100%;max-width:340px;text-align:center;border-top:3px solid var(--gold);}
-.login-icon{font-size:48px;margin-bottom:12px;}
-.login-title{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--gold);letter-spacing:1.5px;margin-bottom:4px;}
-.login-sub{font-size:13px;color:var(--muted);margin-bottom:28px;}
-.login-input{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:14px 16px;color:var(--text);font-size:18px;font-family:'DM Sans',sans-serif;outline:none;text-align:center;letter-spacing:4px;transition:border-color .2s;margin-bottom:14px;}
-.login-input:focus{border-color:var(--gold);}
-.login-input::placeholder{letter-spacing:1px;font-size:14px;color:var(--muted);}
-.login-btn{width:100%;padding:14px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#050e08;font-family:'DM Sans',sans-serif;font-weight:700;font-size:15px;cursor:pointer;transition:all .15s;margin-bottom:12px;}
-.login-btn:active{transform:scale(.97);}
-.login-err{font-size:13px;color:#f87171;min-height:18px;transition:opacity .2s;}
+
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;padding-bottom:90px;}
 header{background:linear-gradient(160deg,var(--green),var(--green2));padding:14px 16px 10px;position:sticky;top:0;z-index:100;border-bottom:3px solid var(--gold);box-shadow:0 6px 24px rgba(0,0,0,.6);}
@@ -122,18 +111,6 @@ header{background:linear-gradient(160deg,var(--green),var(--green2));padding:14p
 </style>
 </head>
 <body>
-
-<div id="login-screen">
-  <div class="login-box">
-    <div class="login-icon">⚽</div>
-    <div class="login-title">COPA 2026</div>
-    <div class="login-sub">Álbum pessoal — acesso restrito</div>
-    <input class="login-input" id="pwd-input" type="password" placeholder="Digite a senha" maxlength="20"
-      onkeydown="if(event.key==='Enter')checkPwd()">
-    <button class="login-btn" onclick="checkPwd()">Entrar</button>
-    <div class="login-err" id="pwd-err"></div>
-  </div>
-</div>
 <header>
   <div class="hd-row">
     <div class="logo">
@@ -203,123 +180,116 @@ header{background:linear-gradient(160deg,var(--green),var(--green2));padding:14p
 // COCA-COLA:   C1–C12
 // ═══════════════════════════════════════════════════════════
 
-const INTRO = {
-  id:'INTRO', title:'Introdução', sub:'Figurinhas 1–9', icon:'🌍',
-  cls:'gold-border',
-  items:[
-    {k:'intro_1',lbl:'1',name:'Logo Copa do Mundo 2026'},
-    {k:'intro_2',lbl:'2',name:'Troféu FIFA'},
-    {k:'intro_3',lbl:'3',name:'Mascote oficial'},
-    {k:'intro_4',lbl:'4',name:'Estádio – MetLife (EUA)'},
-    {k:'intro_5',lbl:'5',name:'Estádio – Azteca (MEX)'},
-    {k:'intro_6',lbl:'6',name:'Estádio – Rose Bowl (EUA)'},
-    {k:'intro_7',lbl:'7',name:'Estádio – BC Place (CAN)'},
-    {k:'intro_8',lbl:'8',name:'Estádio – AT&T Stadium (EUA)'},
-    {k:'intro_9',lbl:'9',name:'Apresentação geral'},
-  ]
-};
 
 // Cada time: code = prefixo usado nas figurinhas (BRA, ARG…)
 // players[0] = escudo (figurinha nº1), players[1..19] = jogadores
 const GROUPS = [
  {id:'A',name:'Grupo A',teams:[
-  {code:'BRA',name:'Brasil',flag:'🇧🇷',players:['Escudo','Alisson','Bento','Marquinhos','Éder Militão','Gabriel Magalhães','Danilo','Wesley','Lucas Paquetá','Casemiro','Bruno Guimarães','Luiz Henrique','Vinícius Júnior','Rodrygo','João Pedro','Matheus Cunha','Gabriel Martinelli','Raphinha','Estêvão','—']},
-  {code:'MAR',name:'Marrocos',flag:'🇲🇦',players:['Escudo','Yassine Bounou','Munir El Kajoui','Achraf Hakimi','Noussair Mazraoui','Nayef Aguerd','Romain Saïss','Jawad El Yamiq','Adam Masina','Sofyan Amrabat','Azzedine Ounahi','Eliesse Ben Seghir','Bilal El Khannouss','Ismael Saibari','Youssef En-Nesyri','Abde Ezzalzouli','Soufiane Rahimi','Brahim Díaz','Ayoub El Kaabi','—']},
-  {code:'HAI',name:'Haiti',flag:'🇭🇹',players:['Escudo','Johny Placide','Carlens Arcus','Jean-Kevin Duverne','Ricardo Adé','Duke Lacroix','Garven Metusala','Hannes Delcroix','Leverton Pierre','Danley Jean Jacques','Jean-Ricner Bellegarde','Christopher Attys','Derrick Etienne Jr.','Josué Casimir','Ruben Providence','Duckens Nazon','Louicius Deedson','Frantzdy Pierrot','—','—']},
-  {code:'SCO',name:'Escócia',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',players:['Escudo','Angus Gunn','Jack Hendry','Kieran Tierney','Aaron Hickey','Andrew Robertson','Scott McKenna','John Souttar','Anthony Ralston','Grant Hanley','Scott McTominay','Billy Gilmour','Lewis Ferguson','Ryan Christie','Kenny McLean','John McGinn','Lyndon Dykes','Che Adams','Ben Doak','—']},
+  {code:'MEX',name:'México',flag:'🇲🇽',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'ZAF',name:'África do Sul',flag:'🇿🇦',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'KOR',name:'Coreia do Sul',flag:'🇰🇷',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'CZE',name:'Tchéquia',flag:'🇨🇿',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
  ]},
  {id:'B',name:'Grupo B',teams:[
-  {code:'MEX',name:'México',flag:'🇲🇽',players:['Escudo','Luis Malagón','Johan Vásquez','Jorge Sánchez','César Montes','Jesús Gallardo','Israel Reyes','Diego Lainez','Carlos Rodríguez','Edson Álvarez','Orbelín Pineda','Marcel Ruiz','Érick Sánchez','Hirving Lozano','Santiago Giménez','Raúl Jiménez','Alexis Vega','Roberto Alvarado','César Huerta','—']},
-  {code:'ZAF',name:'África do Sul',flag:'🇿🇦',players:['Escudo','Ronwen Williams','Sipho Chaine','Aubrey Modiba','Samukele Kabini','Mbekezeli Mbokazi','Siyabonga Ngezana','Khuliso Mudau','Nkosinathi Sibisi','Teboho Mokoena','Thalente Mbatha','Yaya Sithole','Sipho Mbule','Lyle Foster','Ioraam Rayners','Mohau Nkota','Oswin Appolis','Evidence Makgopa','—','—']},
-  {code:'KOR',name:'Coreia do Sul',flag:'🇰🇷',players:['Escudo','Hyeon-woo Jo','Seung-Gyu Kim','Min-jae Kim','Yu-min Cho','Young-woo Seol','Myung-jae Lee','Jae-sung Lee','In-beom Hwang','Kang-in Lee','Seung-ho Paik','Dong-gyeong Lee','Gue-sung Cho','Heung-min Son','Hee-chan Hwang','Hyeon-Gyu Oh','Oh Se-hun','—','—','—']},
-  {code:'CZE',name:'Rep. Tcheca',flag:'🇨🇿',players:['Escudo','Matěj Kovář','Jindřich Staněk','Ladislav Krejčí','Vladimír Coufal','Tomáš Holeš','David Zima','Michal Sadílek','Lukáš Provod','Tomáš Souček','Pavel Šulc','Matěj Vydra','Tomáš Chorý','Václav Černý','Adam Hložek','Patrik Schick','Lukáš Červ','—','—','—']},
+  {code:'CAN',name:'Canadá',flag:'🇨🇦',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'BIH',name:'Bósnia e Herzegovina',flag:'🇧🇦',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'QAT',name:'Catar',flag:'🇶🇦',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'SUI',name:'Suíça',flag:'🇨🇭',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
  ]},
  {id:'C',name:'Grupo C',teams:[
-  {code:'ESP',name:'Espanha',flag:'🇪🇸',players:['Escudo','Unai Simón','Robin Le Normand','Aymeric Laporte','Dean Huijsen','Pedro Porro','Dani Carvajal','Marc Cucurella','Martín Zubimendi','Rodri','Pedri','Fabián Ruiz','Mikel Merino','Lamine Yamal','Dani Olmo','Nico Williams','Ferran Torres','Álvaro Morata','Mikel Oyarzabal','—']},
-  {code:'CPV',name:'Cabo Verde',flag:'🇨🇻',players:['Escudo','Vozinha','Logan Costa','Pico','Diney','Steven Moreira','Wagner Pina','João Paulo','Yannick Semedo','Kevin Pina','Patrick Andrade','Jamiro Monteiro','Deroy Duarte','Garry Rodrigues','Jovane Cabral','Ryan Mendes','Dailon Livramento','Willy Semedo','Bebé','—']},
-  {code:'KSA',name:'Arábia Saudita',flag:'🇸🇦',players:['Escudo','Nawaf Alaqidi','Abdulrahman Al-Sanbi','Saud Abdulhamid','Nawaf Boushal','Jihad Thakri','Moteb Al-Harbi','Hassan Altambakti','Musab Aljuwayr','Ziyad Aljohani','Abdullah Alkhaibari','Nasser Aldawsari','Saleh Alshamat','Marwan Alsahafi','Salem Aldawsari','Abdulrahman Al-Aboud','Feras Albrikan','Saleh Alshehri','Abdullah Al-Hamdan','—']},
-  {code:'URU',name:'Uruguai',flag:'🇺🇾',players:['Escudo','Sergio Rochet','Santiago Mele','Ronald Araujo','José María Giménez','Sebastian Caceres','Mathias Olivera','Guillermo Varela','Nahitan Nandez','Federico Valverde','Giorgian De Arrascaeta','Rodrigo Bentancur','Manuel Ugarte','Nicolás de la Cruz','Maxi Araujo','Darwin Núñez','Federico Viñas','Rodrigo Aguirre','Facundo Pellistri','—']},
+  {code:'BRA',name:'Brasil',flag:'🇧🇷',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'MAR',name:'Marrocos',flag:'🇲🇦',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'HAI',name:'Haiti',flag:'🇭🇹',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'SCO',name:'Escócia',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
  ]},
  {id:'D',name:'Grupo D',teams:[
-  {code:'GER',name:'Alemanha',flag:'🇩🇪',players:['Escudo','Marc-André ter Stegen','Jonathan Tah','David Raum','Nico Schlotterbeck','Antonio Rüdiger','Waldemar Anton','Ridle Baku','Maximilian Mittelstädt','Joshua Kimmich','Florian Wirtz','Felix Nmecha','Leon Goretzka','Jamal Musiala','Serge Gnabry','Kai Havertz','Leroy Sané','Karim Adeyemi','Nick Woltemade','—']},
-  {code:'CUW',name:'Curaçao',flag:'🇨🇼',players:['Escudo','Eloy Room','Armando Obispo','Sherel Floranus','Jurien Gaari','Joshua Brenet','Shurandy Sambo','Livano Comenencia','Juninho Bacuna','Leandro Bacuna','Tahith Chong','Kenji Gorré','Jearl Margaritha','Jurgen Locadia','Jeremy Antonisse','Gervane Kastaneer','Sontje Hansen','—','—','—']},
-  {code:'CIV',name:'Costa do Marfim',flag:'🇨🇮',players:['Escudo','Yahia Fofana','Ghislain Konan','Wilfried Singo','Odilon Kossounou','Evan Ndicka','Willy Boly','Emmanuel Agbadou','Ousmane Diomande','Franck Kessié','Seko Fofana','Ibrahim Sangaré','Amad Diallo','Sébastien Haller','Simon Adingra','Yan Diomande','Evann Guessand','Oumar Diakité','—','—']},
-  {code:'ECU',name:'Equador',flag:'🇪🇨',players:['Escudo','Hernán Galíndez','Gonzalo Valle','Piero Hincapié','Pervis Estupiñán','Willian Pacho','Ángelo Preciado','Joel Ordóñez','Moisés Caicedo','Alan Franco','Kendry Páez','Pedro Vite','John Yeboah','Leonardo Campana','Gonzalo Plata','Nilson Angulo','Alan Minda','Kevin Rodríguez','Enner Valencia','—']},
+  {code:'USA',name:'Estados Unidos',flag:'🇺🇸',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'PAR',name:'Paraguai',flag:'🇵🇾',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'AUS',name:'Austrália',flag:'🇦🇺',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'TUR',name:'Turquia',flag:'🇹🇷',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
  ]},
  {id:'E',name:'Grupo E',teams:[
-  {code:'NED',name:'Holanda',flag:'🇳🇱',players:['Escudo','Bart Verbruggen','Virgil van Dijk','Micky van de Ven','Jurriën Timber','Denzel Dumfries','Nathan Aké','Jeremie Frimpong','Jan Paul van Hecke','Tijjani Reijnders','Ryan Gravenberch','Teun Koopmeiners','Frenkie de Jong','Xavi Simons','Justin Kluivert','Memphis Depay','Donyell Malen','Wout Weghorst','Cody Gakpo','—']},
-  {code:'JPN',name:'Japão',flag:'🇯🇵',players:['Escudo','Zion Suzuki','Henry Heroki Mochizuki','Shogo Taniguchi','Tsuyoshi Watanabe','Kaishu Sano','Yuki Soma','Ao Tanaka','Daichi Kamada','Takefusa Kubo','Ritsu Doan','Keito Nakamura','Takumi Minamino','Shuto Machino','Junya Ito','Koki Ogawa','Ayase Ueda','—','—','—']},
-  {code:'SWE',name:'Suécia',flag:'🇸🇪',players:['Escudo','Victor Johansson','Isak Hien','Gabriel Gudmundsson','Emil Holm','Victor Nilsson Lindelöf','Gustaf Lagerbielke','Lucas Bergvall','Hugo Larsson','Jesper Karlström','Yasin Ayari','Mattias Svanberg','Ken Sema','Roony Bardghji','Dejan Kulusevski','Anthony Elanga','Alexander Isak','Viktor Gyökeres','—','—']},
-  {code:'TUN',name:'Tunísia',flag:'🇹🇳',players:['Escudo','Bechir Ben Said','Aymen Dahmen','Van Valery','Montassar Talbi','Yassine Meriah','Ali Abdi','Dylan Bronn','Ellyes Skhiri','Aissa Laidouni','Ferjani Sassi','Hannibal Mejbri','Elias Achouri','Elias Saad','Hazem Mastouri','Ismael Gharbi','Naim Sliti','—','—','—']},
+  {code:'GER',name:'Alemanha',flag:'🇩🇪',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'CUW',name:'Curaçao',flag:'🇨🇼',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'CIV',name:'Costa do Marfim',flag:'🇨🇮',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'ECU',name:'Equador',flag:'🇪🇨',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
  ]},
  {id:'F',name:'Grupo F',teams:[
-  {code:'BEL',name:'Bélgica',flag:'🇧🇪',players:['Escudo','Thibaut Courtois','Arthur Theate','Timothy Castagne','Zeno Debast','Brandon Mechele','Maxim De Cuyper','Thomas Meunier','Youri Tielemans','Amadou Onana','Nicolas Raskin','Alexis Saelemaekers','Hans Vanaken','Kevin De Bruyne','Jérémy Doku','Charles De Ketelaere','Leandro Trossard','Loïs Openda','Romelu Lukaku','—']},
-  {code:'EGY',name:'Egito',flag:'🇪🇬',players:['Escudo','Mohamed El Shenawy','Mohamed Hany','Yasser Ibrahim','Khaled Sobhi','Ramy Rabia','Hossam Abdelmaguid','Ahmed Fatouh','Marwan Attia','Zizo','Hamdy Fathy','Mohamed Lasheen','Emam Ashour','Osama Faisal','Mohamed Salah','Mostafa Mohamed','Trezeguet','Omar Marmoush','—','—']},
-  {code:'IRN',name:'Irã',flag:'🇮🇷',players:['Escudo','Alireza Beiranvand','Morteza Pouraliganji','Ehsan Hajsafi','Milad Mohammadi','Shoja Khalilzadeh','Ramin Rezaeian','Hossein Kanaani','Sadegh Moharrami','Saeed Ezatolahi','Saman Ghoddos','Omid Noorafkan','Roozbeh Cheshmi','Sardar Azmoun','Mehdi Taremi','Alireza Jahanbakhsh','Ali Gholizadeh','—','—','—']},
-  {code:'NZL',name:'Nova Zelândia',flag:'🇳🇿',players:['Escudo','Max Crocombe','Alex Paulsen','Michael Boxall','Liberato Cacace','Tim Payne','Tyler Bindon','Francis de Vries','Joe Bell','Sarpreet Singh','Ryan Thomas','Matthew Garbett','Marko Stamenić','Ben Old','Chris Wood','Elijah Just','Callum McCowatt','Kosta Barbarouses','—','—']},
+  {code:'NED',name:'Holanda',flag:'🇳🇱',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'JPN',name:'Japão',flag:'🇯🇵',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'SWE',name:'Suécia',flag:'🇸🇪',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'TUN',name:'Tunísia',flag:'🇹🇳',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
  ]},
  {id:'G',name:'Grupo G',teams:[
-  {code:'FRA',name:'França',flag:'🇫🇷',players:['Escudo','Mike Maignan','Theo Hernández','William Saliba','Jules Koundé','Ibrahima Konaté','Dayot Upamecano','Lucas Digne','Aurélien Tchouaméni','Eduardo Camavinga','Manu Koné','Adrien Rabiot','Michael Olise','Ousmane Dembélé','Bradley Barcola','Désiré Doué','Kingsley Coman','Hugo Ekitike','Kylian Mbappé','—']},
-  {code:'SEN',name:'Senegal',flag:'🇸🇳',players:['Escudo','Eduardo Mendy','Yehvann Diouf','Moussa Niakhaté','Abdoulaye Seck','Ismail Jakobs','El Hadji Malick Diouf','Kalidou Koulibaly','Idrissa Gana Gueye','Pape Matar Sarr','Pape Gueye','Habib Diarra','Lamine Camara','Sadio Mane','Ismaïla Sarr','Boulaye Dia','Iliman Ndiaye','Nicolas Jackson','Krepin Diatta','—']},
-  {code:'IRQ',name:'Iraque',flag:'🇮🇶',players:['Escudo','Jalal Hassan','Rebin Sulaka','Hussein Ali','Akam Hashem','Merchas Doski','Zaid Tahseen','Manaf Younis','Zidane Iqbal','Amir Al-Ammari','Ibrahim Bayesh','Ali Jasim','Youssef Amyn','Aimar Sher','Osama Rashid','Ali Al-Hamadi','Aymen Hussein','Mohanad Ali','—','—']},
-  {code:'NOR',name:'Noruega',flag:'🇳🇴',players:['Escudo','Ørjan Nyland','Julian Ryerson','Leo Østigård','Kristoffer Ajer','Marcus Holmgren Pedersen','Torbjørn Heggem','Morten Thorsby','Martin Ødegaard','Sander Berge','Andreas Schjelderup','Patrick Berg','Erling Haaland','Alexander Sørloth','Aron Dønnum','Jørgen Strand Larsen','Antonio Nusa','Oscar Bobb','—','—']},
+  {code:'BEL',name:'Bélgica',flag:'🇧🇪',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'EGY',name:'Egito',flag:'🇪🇬',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'IRN',name:'Irã',flag:'🇮🇷',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'NZL',name:'Nova Zelândia',flag:'🇳🇿',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
  ]},
  {id:'H',name:'Grupo H',teams:[
-  {code:'ARG',name:'Argentina',flag:'🇦🇷',players:['Escudo','Emiliano Martínez','Nahuel Molina','Cristian Romero','Nicolás Otamendi','Nicolás Tagliafico','Leonardo Balerdi','Enzo Fernández','Alexis Mac Allister','Rodrigo De Paul','Exequiel Palacios','Leandro Paredes','Nico Paz','Franco Mastantuono','Nico González','Lionel Messi','Lautaro Martínez','Julián Álvarez','Giuliano Simeone','—']},
-  {code:'ALG',name:'Argélia',flag:'🇩🇿',players:['Escudo','Alexis Guendouz','Ramy Bensebaini','Youcef Atal','Rayan Aït-Nouri','Aïssa Mandi','Ismael Bennacer','Houssem Aouar','Hicham Boudaoui','Ramiz Zerrouki','Nabil Bentaleb','Farés Chaibi','Riyad Mahrez','Said Benrahma','Anis Hadj Moussa','Amine Gouiri','Baghdad Bounedjah','Mohammed Amoura','—','—']},
-  {code:'AUT',name:'Áustria',flag:'🇦🇹',players:['Escudo','Alexander Schlager','Patrick Pentz','David Alaba','Kevin Danso','Philipp Lienhart','Stefan Posch','Alexander Prass','Xaver Schlager','Marcel Sabitzer','Konrad Laimer','Florian Grillitsch','Nicolas Seiwald','Romano Schmid','Patrick Wimmer','Christoph Baumgartner','Michael Gregoritsch','Marko Arnautović','—','—']},
-  {code:'JOR',name:'Jordânia',flag:'🇯🇴',players:['Escudo','Yazeed Abulaila','Ihsan Haddad','Mohammad Abu Hashish','Yazan Al-Arab','Abdallah Nasib','Saleem Obaid','Mohammad Abualnadi','Ibrahim Saadeh','Nizar Al-Rashdan','Noor Al-Rawabdeh','Mohannad Abu Taha','Amer Jamous','Musa Al-Taamari','Yazan Al-Naimat','Mahmoud Al-Mardi','Ali Olwan','Mohammad Abu Zrayq','Ibrahim Sabra','—']},
+  {code:'ESP',name:'Espanha',flag:'🇪🇸',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'CPV',name:'Cabo Verde',flag:'🇨🇻',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'KSA',name:'Arábia Saudita',flag:'🇸🇦',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'URU',name:'Uruguai',flag:'🇺🇾',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
  ]},
  {id:'I',name:'Grupo I',teams:[
-  {code:'POR',name:'Portugal',flag:'🇵🇹',players:['Escudo','Diogo Costa','José Sá','Rúben Dias','João Cancelo','Diogo Dalot','Nuno Mendes','Gonçalo Inácio','Bernardo Silva','Bruno Fernandes','Rúben Neves','Vitinha','João Neves','Cristiano Ronaldo','Francisco Trincão','João Félix','Gonçalo Ramos','Pedro Neto','Rafael Leão','—']},
-  {code:'COD',name:'RD Congo',flag:'🇨🇩',players:['Escudo','Lionel Mpasi','Aaron Wan-Bissaka','Axel Tuanzebe','Arthur Masuaku','Chancel Mbemba','Joris Kayembe','Charles Pickel','Edo Kayembe','Samuel Moutoussamy','Noah Sadiki','Théo Bongonda','Meschack Elia','Yoane Wissa','Brian Cipenga','Fiston Mayele','Cédric Bakambu','Nathanaël Mbuku','—','—']},
-  {code:'UZB',name:'Uzbequistão',flag:'🇺🇿',players:['Escudo','Utkir Yusupov','Farrukh Savfiev','Sherzod Nasrullaev','Umar Eshmurodov','Rustamjon Ashurmatov','Abdukodir Khusanov','Odilon Rashidov','Jasur Jalolov','Otabek Shukurov','Jamshid Iskanderov','Eldor Shomurodov','Shamsiddin Otajanov','Bobir Abdixoliqov','Jaloliddin Masharipov','Doston Tursunov','Dostonbek Khamdamov','—','—','—']},
-  {code:'VEN',name:'Venezuela',flag:'🇻🇪',players:['Escudo','Rafael Romo','Wuilker Faríñez','Jhon Chancellor','Jon Aramburu','Yordan Osorio','Nahuel Ferraresi','Wilker Ángel','Bernaldo Carmona','Jefferson Savarino','Tomás Rincón','Yeferson Soteldo','Adalberto Peñaranda','Salomón Rondón','Eric Ramírez','Edson Castillo','Darwin Machís','—','—','—']},
+  {code:'FRA',name:'França',flag:'🇫🇷',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'SEN',name:'Senegal',flag:'🇸🇳',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'IRQ',name:'Iraque',flag:'🇮🇶',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'NOR',name:'Noruega',flag:'🇳🇴',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
  ]},
  {id:'J',name:'Grupo J',teams:[
-  {code:'ENG',name:'Inglaterra',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',players:['Escudo','Jordan Pickford','Dean Henderson','Kyle Walker','Harry Maguire','John Stones','Luke Shaw','Trent Alexander-Arnold','Conor Gallagher','Declan Rice','Jude Bellingham','Phil Foden','Mason Mount','Marcus Rashford','Bukayo Saka','Raheem Sterling','Harry Kane','Ollie Watkins','Cole Palmer','—']},
-  {code:'COL',name:'Colômbia',flag:'🇨🇴',players:['Escudo','David Ospina','Camilo Vargas','Santiago Arias','Dávinson Sánchez','Yerry Mina','William Tesillo','Daniel Muñoz','Wilmar Barrios','Mateus Uribe','Jefferson Lerma','Jhon Arias','Juan Cuadrado','Luis Díaz','James Rodríguez','Rafael Santos Borré','Duván Zapata','Cucho Hernández','Jhon Durán','—']},
-  {code:'GRE',name:'Grécia',flag:'🇬🇷',players:['Escudo','Odysseas Vlachodimos','Stefanos Kapino','Kostas Tsimikas','Petros Mantalos','Kostas Fortounis','Manolis Siopis','Dimitris Limnios','Christos Tzolis','Giorgos Masouras','Dimitris Giannoulis','Anastasios Bakasetas','Konstantinos Koulierakis','Sotiris Alexandropoulos','Georgios Giakoumakis','Vangelis Pavlidis','Fotis Ioannidis','—','—','—']},
-  {code:'PAN',name:'Panamá',flag:'🇵🇦',players:['Escudo','Luis Mejía','Orlando Mosquera','Fidel Escobar','Édgar Bárcenas','Harold Cummings','Michael Murillo','Óscar Linton','Adalberto Carrasquilla','Aníbal Godoy','José Fajardo','Cristian Martínez','Rolando Blackburn','Gabriel Torres','Alberto Quintero','Cecilio Waterman','Eduardo Guerrero','Ismael Díaz','Freddy Góndola','—']},
+  {code:'ARG',name:'Argentina',flag:'🇦🇷',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'ALG',name:'Argélia',flag:'🇩🇿',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'AUT',name:'Áustria',flag:'🇦🇹',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'JOR',name:'Jordânia',flag:'🇯🇴',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
  ]},
  {id:'K',name:'Grupo K',teams:[
-  {code:'GHA',name:'Gana',flag:'🇬🇭',players:['Escudo','Lawrence Ati-Zigi','Manaf Nurudeen','Andy Yiadom','Alexander Djiku','Daniel Amartey','Tariq Lamptey','Abdul Mumin','Baba Rahman','Thomas Partey','Salis Abdul Samed','Mohammed Kudus','Kamaldeen Sulemana','Antoine Semenyo','Jordan Ayew','Inaki Williams','Osman Bukari','Ernest Nuamah','—','—']},
-  {code:'CRO',name:'Croácia',flag:'🇭🇷',players:['Escudo','Dominik Livaković','Ivica Ivušić','Josip Šutalo','Dario Špikić','Josip Stanišić','Martin Erlić','Borna Sosa','Josip Juranović','Luka Modrić','Mateo Kovačić','Marcelo Brozović','Mario Pašalić','Ante Budimir','Andrej Kramarić','Ivan Perišić','Bruno Petković','Luka Ivanušec','—','—']},
-  {code:'BIH',name:'Bósnia e Herz.',flag:'🇧🇦',players:['Escudo','Nikola Vasilj','Amar Dedić','Sead Kolašinac','Tarik Muharemović','Nihad Mujakić','Nikola Katić','Amir Hadžiahmetović','Benjamin Tahirović','Armin Gigović','Ivan Šunjić','Ivan Bašić','Dženis Burnić','Esmir Bajraktarević','Amar Memić','Ermedin Demirović','Edin Džeko','Samed Baždar','Haris Tabaković','—']},
-  {code:'QAT',name:'Catar',flag:'🇶🇦',players:['Escudo','Meshaal Barsham','Sultan Albrake','Lucas Mendes','Homam Ahmed','Boualem Khoukhi','Pedro Miguel','Tarek Salman','Mohamed Al-Mannai','Karim Boudiaf','Assim Madibo','Ahmed Fatehi','Mohammed Waad','Abdulaziz Hatem','Hassan Al-Haydos','Edmilson Junior','Akram Hassan Afif','Ahmed Al Ganehi','Almoez Ali','—']},
+  {code:'POR',name:'Portugal',flag:'🇵🇹',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'COD',name:'RD Congo',flag:'🇨🇩',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'UZB',name:'Uzbequistão',flag:'🇺🇿',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'COL',name:'Colômbia',flag:'🇨🇴',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
  ]},
  {id:'L',name:'Grupo L',teams:[
-  {code:'USA',name:'Estados Unidos',flag:'🇺🇸',players:['Escudo','Matt Freese','Chris Richards','Tim Ream','Mark McKenzie','Antonee Robinson','Tyler Adams','Tanner Tessmann','Weston McKennie','Christian Roldan','Timothy Weah','Diego Luna','Malik Tillman','Christian Pulisic','Brenden Aaronson','Ricardo Pepi','Haji Wright','Folarin Balogun','—','—']},
-  {code:'PAR',name:'Paraguai',flag:'🇵🇾',players:['Escudo','Roberto Fernández','Orlando Gill','Gustavo Gómez','Fabián Balbuena','Juan José Cáceres','Omar Alderete','Junior Alonso','Mathías Villasanti','Diego Gómez','Damián Bobadilla','Andrés Cubas','Matías Galarza','Julio Enciso','Richard Sánchez','Carlos González','Ramón Sosa','Alejandro Romero','Antonio Sanabria','—']},
-  {code:'AUS',name:'Austrália',flag:'🇦🇺',players:['Escudo','Mathew Ryan','Joe Gauci','Harry Souttar','Alessandro Circati','Jordan Bos','Aziz Behich','Cameron Burgess','Lewis Miller','Milos Degenek','Jackson Irvine','Riley McGree','Connor Metcalfe','Patrick Yazbek','Craig Goodwin','Kusini Yengi','Nestory Irankunda','Mohamed Touré','—','—']},
-  {code:'TUR',name:'Turquia',flag:'🇹🇷',players:['Escudo','Ugurcan Cakir','Mert Muldur','Zeki Celik','Abdulkerim Bardakci','Caglar Soyuncu','Merih Demiral','Ferdi Kadioglu','Kaan Ayhan','Ismail Yuksek','Hakan Calhanoglu','Orkun Kokcu','Arda Güler','Irfan Can Kahvecu','Yunus Akgun','Can Uzun','Baris Alper Yilmaz','Kerem Akturkoglu','Kenan Yildiz','—']},
+  {code:'ENG',name:'Inglaterra',flag:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'CRO',name:'Croácia',flag:'🇭🇷',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'GHA',name:'Gana',flag:'🇬🇭',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
+  {code:'PAN',name:'Panamá',flag:'🇵🇦',players:['Escudo', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']},
  ]},
 ];
 
+const ESPECIAIS = {
+  id:'FWC_ESP', title:'Especiais', sub:'FWC 00 + FWC 1–8 • 9 figurinhas', icon:'⭐', cls:'gold-border',
+  items: [{k:'FWC_00',lbl:'FWC 00',name:''},...Array.from({length:8},(_,i)=>({k:`FWC_${i+1}`,lbl:`FWC ${i+1}`,name:''}))]
+};
+const SEL_ESP = {
+  id:'FWC_SEL', title:'Seleções Especiais', sub:'FWC 9–19 • 11 figurinhas', icon:'🌟', cls:'gold-border',
+  items: Array.from({length:11},(_,i)=>({k:`FWC_${i+9}`,lbl:`FWC ${i+9}`,name:''}))
+};
 const FIFA_MUSEUM = {
-  id:'FM', title:'FIFA Museum', sub:'Campeões históricos • FM 1–FM 11', icon:'🏛️', cls:'gold-border',
-  items: Array.from({length:11},(_,i)=>({k:`FM_${i+1}`,lbl:`FM ${i+1}`,name:`Campeão histórico ${i+1}`}))
+  id:'FM', title:'FIFA Museum', sub:'FM 1–11 • 11 figurinhas', icon:'🏛️', cls:'gold-border',
+  items: Array.from({length:11},(_,i)=>({k:`FM_${i+1}`,lbl:`FM ${i+1}`,name:''}))
 };
 const COCA = {
-  id:'CC', title:'Coca-Cola', sub:'Figurinhas especiais • C1–C12', icon:'🥤', cls:'red-border',
-  items: Array.from({length:12},(_,i)=>({k:`C_${i+1}`,lbl:`C${i+1}`,name:`Coca-Cola ${i+1}`}))
+  id:'CC', title:'Coca-Cola', sub:'CC1–CC14 • 14 figurinhas', icon:'🥤', cls:'red-border',
+  items: Array.from({length:14},(_,i)=>({k:`CC_${i+1}`,lbl:`CC${i+1}`,name:''}))
 };
 
 
 const FLAG_URL = (iso) => `https://flagcdn.com/w40/${iso}.png`;
 const CODE_ISO = {
-  'BRA':'br','MAR':'ma','HAI':'ht','SCO':'gb-sct',
   'MEX':'mx','ZAF':'za','KOR':'kr','CZE':'cz',
-  'ESP':'es','CPV':'cv','KSA':'sa','URU':'uy',
+  'CAN':'ca','BIH':'ba','QAT':'qa','SUI':'ch',
+  'BRA':'br','MAR':'ma','HAI':'ht','SCO':'gb-sct',
+  'USA':'us','PAR':'py','AUS':'au','TUR':'tr',
   'GER':'de','CUW':'cw','CIV':'ci','ECU':'ec',
   'NED':'nl','JPN':'jp','SWE':'se','TUN':'tn',
   'BEL':'be','EGY':'eg','IRN':'ir','NZL':'nz',
+  'ESP':'es','CPV':'cv','KSA':'sa','URU':'uy',
   'FRA':'fr','SEN':'sn','IRQ':'iq','NOR':'no',
   'ARG':'ar','ALG':'dz','AUT':'at','JOR':'jo',
-  'POR':'pt','COD':'cd','UZB':'uz','VEN':'ve',
-  'ENG':'gb-eng','COL':'co','GRE':'gr','PAN':'pa',
-  'CAN':'ca','BIH':'ba','QAT':'qa','SUI':'ch',
-  'USA':'us','PAR':'py','AUS':'au','TUR':'tr',
+  'POR':'pt','COD':'cd','UZB':'uz','COL':'co',
+  'ENG':'gb-eng','CRO':'hr','GHA':'gh','PAN':'pa',
 };
 // ═══════════════════════════════════
 // STATE
@@ -336,14 +306,32 @@ function gs(k){
 }
 function gcount(k){return D[k]||0;}
 
+function calcCollected(){
+  let total = 0;
+
+  Object.keys(D).forEach(k=>{
+    if(D[k] >= 1) total++;
+  });
+
+  return total;
+}
+
 function calcTotal(){
-  let t=INTRO.items.length;
-  GROUPS.forEach(g=>g.teams.forEach(tm=>t+=tm.players.length));
-  t+=FIFA_MUSEUM.items.length+COCA.items.length;
+  let t=0;
+
+  GROUPS.forEach(g=>{
+    g.teams.forEach(tm=>{
+      t += tm.players.length;
+    });
+  });
+
+  t += ESPECIAIS.items.length;
+  t += SEL_ESP.items.length;
+  t += FIFA_MUSEUM.items.length;
+  t += COCA.items.length;
+
   return t;
 }
-function calcCollected(){return Object.values(D).filter(v=>v>=1).length;}
-
 // ═══════════════════════════════════
 // RENDER
 // ═══════════════════════════════════
@@ -352,7 +340,6 @@ function render(){
   const cnt=document.getElementById('content');
   cnt.innerHTML='';
 
-  renderSpecialSection(INTRO,q,cnt);
 
   // Flatten all teams and sort alphabetically by name
   const allTeams=GROUPS.flatMap(g=>g.teams).sort((a,b)=>a.name.localeCompare(b.name,'pt'));
@@ -393,6 +380,8 @@ function render(){
   });
   if(teamsWrap.children.length>1) cnt.appendChild(teamsWrap);
 
+  renderSpecialSection(ESPECIAIS,q,cnt);
+  renderSpecialSection(SEL_ESP,q,cnt);
   renderSpecialSection(FIFA_MUSEUM,q,cnt);
   renderSpecialSection(COCA,q,cnt);
 
@@ -502,8 +491,9 @@ document.getElementById('modShare').addEventListener('click',function(e){if(e.ta
 function openShare(){
   const rep=[],mis=[];
   function check(k,lbl){const cnt=gcount(k);if(cnt>1)rep.push(`${lbl}(×${cnt-1})`);else if(cnt===0)mis.push(lbl);}
-  INTRO.items.forEach(s=>check(s.k,s.lbl));
   GROUPS.forEach(g=>g.teams.forEach(tm=>tm.players.forEach((_,i)=>check(`${tm.code}|${i+1}`,`${tm.code} ${i+1}`))));
+  ESPECIAIS.items.forEach(s=>check(s.k,s.lbl));
+  SEL_ESP.items.forEach(s=>check(s.k,s.lbl));
   FIFA_MUSEUM.items.forEach(s=>check(s.k,s.lbl));
   COCA.items.forEach(s=>check(s.k,s.lbl));
   const col=calcCollected(),tot=calcTotal();
@@ -526,32 +516,6 @@ function confirmReset(){if(confirm('Apagar todo o progresso? Não há como desfa
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2400);}
 
 
-// ═══════════════════════════════════
-// AUTH — senha simples
-// ═══════════════════════════════════
-// Troque MINHA_SENHA pela senha que você quiser
-const PWD_HASH = 'whu3';
-function hashStr(s){let h=0;for(let i=0;i<s.length;i++){h=Math.imul(31,h)+s.charCodeAt(i)|0;}return h.toString(36);}
-function checkPwd(){
-  const v=document.getElementById('pwd-input').value;
-  if(hashStr(v)===PWD_HASH){
-    sessionStorage.setItem('copa26_auth','1');
-    document.getElementById('login-screen').style.display='none';
-    document.getElementById('pwd-err').textContent='';
-  } else {
-    document.getElementById('pwd-err').textContent='Senha incorreta. Tente novamente.';
-    document.getElementById('pwd-input').value='';
-    document.getElementById('pwd-input').focus();
-  }
-}
-function initAuth(){
-  if(sessionStorage.getItem('copa26_auth')==='1'){
-    document.getElementById('login-screen').style.display='none';
-  } else {
-    setTimeout(()=>document.getElementById('pwd-input').focus(),300);
-  }
-}
-initAuth();
 load();render();
 </script>
 </body>
